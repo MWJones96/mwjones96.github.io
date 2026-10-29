@@ -4,12 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Matthew Jones · CV</title>
-<script>
-  var uk = ["Europe/London", "Europe/Belfast", "Europe/Guernsey", "Europe/Isle_of_Man", "Europe/Jersey"];
-  var tz = "";
-  try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) {}
-  location.replace(uk.indexOf(tz) >= 0 ? "/uk/cv.pdf" : "/us/cv.pdf");
-</script>
+<script src="/region.js"></script>
+<script>location.replace(isUK ? "/uk/cv.pdf" : "/us/cv.pdf");</script>
 </head>
 <body>
 <p><a href="/us/cv.pdf">Open CV</a></p>

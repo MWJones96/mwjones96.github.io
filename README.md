@@ -8,8 +8,8 @@ A static site with no build step. GitHub Pages serves the files as they are, so 
 
 ## Pages
 
-- **`/`** (`index.html`): homepage with an introduction, a "View CV" button, experience, featured and other projects linking to GitHub, skills, education and contact links. Styles are inline, with the Inter and JetBrains Mono fonts from Google Fonts, and follow the visitor's light or dark colour scheme.
-- **`/cv/`** (`cv/index.html`): redirects to the right CV for the visitor's location, decided from the browser's time zone:
+- **`/`** (`index.html`): homepage with an introduction, a "View CV" button, experience, featured and other projects linking to GitHub, skills, education and contact links. Styles are inline, with the Inter and JetBrains Mono fonts from Google Fonts, and follow the visitor's light or dark colour scheme. The location under the name reads "London, UK" for visitors in a UK time zone and "Washington, DC" otherwise, including without JavaScript.
+- **`/cv/`** (`cv/index.html`): redirects to the right CV for the visitor's location, decided from the browser's time zone by `region.js`, which the homepage also uses:
   - `Europe/London`, `Europe/Belfast`, `Europe/Guernsey`, `Europe/Isle_of_Man` or `Europe/Jersey` go to `/uk/cv.pdf`.
   - Any other time zone, or one that cannot be read, goes to `/us/cv.pdf`.
   - Without JavaScript, the page shows a link to `/us/cv.pdf`.
@@ -36,6 +36,7 @@ then visit `http://localhost:8000`.
 ```
 index.html      Homepage
 cv/index.html   Time-zone-based redirect to the US or UK CV
+region.js       Sets isUK from the browser's time zone, for the homepage and /cv/
 us/cv.pdf       US CV (published automatically)
 uk/cv.pdf       UK CV (published automatically)
 ```

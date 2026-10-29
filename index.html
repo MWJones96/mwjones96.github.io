@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Matthew Jones · Software Engineer</title>
-<meta name="description" content="Matthew Jones, software engineer in London. Backend systems, cloud infrastructure and reliability, with experience at AWS, U.S. Bank and Quaisr.">
+<meta name="description" content="Matthew Jones, software engineer. Backend systems, cloud infrastructure and reliability, with experience at AWS, U.S. Bank and Quaisr.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
@@ -120,7 +120,9 @@
 
 <main class="wrap">
   <header>
-    <p class="eyebrow">Software Engineer · London, UK</p>
+    <p class="eyebrow">Software Engineer · <span id="location">Washington, DC</span></p>
+    <script src="/region.js"></script>
+    <script>if (isUK) document.getElementById("location").textContent = "London, UK";</script>
     <h1>Backend systems, cloud infrastructure and reliability.</h1>
     <p class="lede">I build and run production services, most recently making an engineering simulation platform
       highly available on Kubernetes. Before that I worked on AWS Inspector at Amazon and on Spend Management at U.S. Bank.</p>
