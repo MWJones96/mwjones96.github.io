@@ -8,10 +8,10 @@
   var uk = ["Europe/London", "Europe/Belfast", "Europe/Guernsey", "Europe/Isle_of_Man", "Europe/Jersey"];
   var tz = "";
   try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) {}
-  location.replace(uk.indexOf(tz) >= 0 ? "uk.pdf" : "us.pdf");
+  location.replace(uk.indexOf(tz) >= 0 ? "/uk/cv.pdf" : "/us/cv.pdf");
 </script>
 </head>
 <body>
-<p>Choose an edition: <a href="us.pdf">US</a> · <a href="uk.pdf">UK</a></p>
+<p><a href="/us/cv.pdf">Open CV</a></p>
 </body>
 </html>
