@@ -3,101 +3,313 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Matthew Jones</title>
-<meta name="description" content="Matthew Jones, software engineer. Projects and CV.">
+<title>Matthew Jones · Software Engineer</title>
+<meta name="description" content="Matthew Jones, software engineer in London. Backend systems, cloud infrastructure and reliability, with experience at AWS, U.S. Bank and Quaisr.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #fbfaf8; --fg: #1d1d1f; --muted: #6b6b70; --line: #e4e2dd;
-    --card: #ffffff; --accent: #2457c5;
+    --bg: #fbfaf8; --fg: #18181b; --muted: #63636b; --faint: #8b8b93; --line: #e6e3dd;
+    --card: #ffffff; --accent: #2457c5; --accent-soft: #e8eefb; --chip: #f1efea;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #141416; --fg: #ececee; --muted: #9a9aa2; --line: #2a2a2f;
-      --card: #1b1b1f; --accent: #7da2ff;
+      --bg: #121214; --fg: #ececee; --muted: #a1a1aa; --faint: #74747c; --line: #27272c;
+      --card: #19191c; --accent: #82a6ff; --accent-soft: #1b2336; --chip: #222226;
     }
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0; background: var(--bg); color: var(--fg);
-    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font: 16px/1.6 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
-  main { max-width: 760px; margin: 0 auto; padding: 72px 16px 56px; }
-  h1 { font-size: 2.4rem; line-height: 1.1; margin: 0 0 8px; letter-spacing: -0.02em; }
-  .lede { color: var(--muted); margin: 0 0 24px; font-size: 1.1rem; }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
-  .actions { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
-  .button {
-    display: inline-block; padding: 10px 18px; border-radius: 8px;
-    background: var(--fg); color: var(--bg); font-weight: 600;
-  }
-  .button:hover { text-decoration: none; opacity: 0.88; }
-  h2 {
-    font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em;
-    color: var(--muted); margin: 64px 0 16px; font-weight: 600;
-  }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
-  .card {
-    padding: 18px; border: 1px solid var(--line); border-radius: 10px;
-    background: var(--card); color: inherit;
-    display: flex; flex-direction: column;
-  }
-  .card:hover { text-decoration: none; border-color: var(--accent); }
-  .card h3 { margin: 0 0 6px; font-size: 1rem; }
-  .card p { margin: 0 0 12px; color: var(--muted); font-size: 0.92rem; line-height: 1.5; }
-  .lang { font-size: 0.8rem; color: var(--muted); margin-top: auto; }
-  footer {
-    margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line);
-    display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 0.92rem;
-  }
+  code { font: 0.88em "JetBrains Mono", ui-monospace, monospace; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+
+  nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent);
+        backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  nav .name { font-weight: 600; color: var(--fg); }
+  nav .name:hover { text-decoration: none; }
+  nav ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; font-size: 0.92rem; }
+  nav ul a { color: var(--muted); }
+  nav ul a:hover { color: var(--fg); text-decoration: none; }
+  @media (max-width: 560px) { nav ul li.hide-sm { display: none; } }
+
+  header { padding: 80px 0 56px; }
+  .eyebrow { font: 500 0.85rem "JetBrains Mono", ui-monospace, monospace; color: var(--accent); margin: 0 0 14px; }
+  h1 { font-size: clamp(2.2rem, 6vw, 3.2rem); line-height: 1.08; margin: 0 0 18px; letter-spacing: -0.03em; }
+  .lede { color: var(--muted); font-size: 1.15rem; max-width: 640px; margin: 0 0 28px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .button { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 8px;
+            font-weight: 600; font-size: 0.95rem; border: 1px solid var(--line); color: var(--fg); background: var(--card); }
+  .button:hover { text-decoration: none; border-color: var(--fg); }
+  .button.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  .button.primary:hover { opacity: 0.88; }
+  .button svg { width: 18px; height: 18px; fill: currentColor; }
+  .facts { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 36px 0 0; padding: 0; list-style: none;
+           color: var(--muted); font-size: 0.92rem; }
+  .facts strong { color: var(--fg); font-weight: 600; }
+
+  section { padding: 48px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--faint);
+       margin: 0 0 28px; font-weight: 600; }
+
+  .timeline { list-style: none; margin: 0; padding: 0; }
+  .role { display: grid; grid-template-columns: 150px 1fr; gap: 4px 24px; padding: 0 0 26px; }
+  .role:last-child { padding-bottom: 0; }
+  .when { color: var(--faint); font-size: 0.88rem; padding-top: 2px; }
+  .role h3 { margin: 0; font-size: 1.05rem; }
+  .role .org { color: var(--muted); font-weight: 500; }
+  .role p { margin: 6px 0 0; color: var(--muted); font-size: 0.95rem; }
+  @media (max-width: 600px) { .role { grid-template-columns: 1fr; } }
+
+  .featured { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 760px) { .featured { grid-template-columns: 1fr; } }
+  .card { display: flex; flex-direction: column; padding: 22px; border: 1px solid var(--line);
+          border-radius: 12px; background: var(--card); color: inherit; transition: border-color .15s, transform .15s; }
+  a.card:hover { text-decoration: none; border-color: var(--accent); transform: translateY(-2px); }
+  .card h3 { margin: 0 0 6px; font-size: 1.08rem; display: flex; justify-content: space-between; gap: 12px; }
+  .card h3 .arrow { color: var(--faint); font-weight: 400; }
+  .card > p { margin: 0 0 12px; color: var(--muted); font-size: 0.95rem; line-height: 1.55; }
+  .card ul { margin: 0 0 16px; padding-left: 18px; color: var(--muted); font-size: 0.9rem; line-height: 1.55; }
+  .card li { margin-bottom: 4px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+  .tag { font: 500 0.75rem "JetBrains Mono", ui-monospace, monospace; padding: 3px 8px;
+         border-radius: 6px; background: var(--chip); color: var(--muted); }
+  .tag.lang { background: var(--accent-soft); color: var(--accent); }
+
+  h2.sub { margin-top: 44px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+  .grid .card { padding: 18px; }
+  .grid .card h3 { font-size: 1rem; }
+  .grid .card > p { font-size: 0.9rem; }
+
+  .skills { display: grid; grid-template-columns: 170px 1fr; gap: 14px 24px; margin: 0; }
+  .skills dt { color: var(--faint); font-size: 0.9rem; padding-top: 3px; }
+  .skills dd { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .skills .tag { font-size: 0.8rem; padding: 4px 9px; }
+  @media (max-width: 600px) { .skills { grid-template-columns: 1fr; gap: 6px; } .skills dd { margin-bottom: 10px; } }
+
+  .edu { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .edu .card h3 { font-size: 1rem; }
+  .edu .card p { margin: 0; }
+
+  footer { padding: 48px 0 64px; border-top: 1px solid var(--line); }
+  footer h2 { margin-bottom: 12px; }
+  footer p { color: var(--muted); margin: 0 0 22px; max-width: 560px; }
 </style>
 </head>
 <body>
-<main>
-  <h1>Matthew Jones</h1>
-  <p class="lede">Software engineer working on backend systems, cloud infrastructure and reliability.</p>
-  <div class="actions">
-    <a class="button" href="/cv/">View CV</a>
+<nav>
+  <div class="wrap">
+    <a class="name" href="#">Matthew Jones</a>
+    <ul>
+      <li class="hide-sm"><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li class="hide-sm"><a href="#skills">Skills</a></li>
+      <li><a href="/cv/">CV</a></li>
+    </ul>
   </div>
+</nav>
 
-  <h2>Selected projects</h2>
-  <div class="grid">
-    <a class="card" href="https://github.com/MWJones96/NESEmulator">
-      <h3>NES Emulator</h3>
-      <p>An emulator for the Nintendo Entertainment System, with CI on every push.</p>
-      <span class="lang">Rust</span>
-    </a>
-    <a class="card" href="https://github.com/MWJones96/Advent-of-Code-2025">
-      <h3>Advent of Code 2025</h3>
-      <p>Solutions to the 2025 puzzles, using the Z3 solver where brute force won't do.</p>
-      <span class="lang">Rust</span>
-    </a>
-    <a class="card" href="https://github.com/MWJones96/GitHub-User-Activity">
-      <h3>GitHub User Activity</h3>
-      <p>A command-line tool that fetches and summarises a user's recent GitHub activity.</p>
-      <span class="lang">Rust</span>
-    </a>
-    <a class="card" href="https://github.com/MWJones96/Chip8-Interpreter">
-      <h3>Chip-8 Interpreter</h3>
-      <p>An interpreter for Chip-8, the 1970s language first run on the Telmac 1800.</p>
-      <span class="lang">Python</span>
-    </a>
-    <a class="card" href="https://github.com/MWJones96/Sudoku">
-      <h3>Sudoku</h3>
-      <p>A Sudoku game with machine-learning classification of handwritten digits.</p>
-      <span class="lang">Python</span>
-    </a>
-    <a class="card" href="https://github.com/MWJones96/Chess">
-      <h3>Chess</h3>
-      <p>A chess game with a Swing UI, later ported to C++ and Qt.</p>
-      <span class="lang">Java · C++</span>
-    </a>
-  </div>
+<main class="wrap">
+  <header>
+    <p class="eyebrow">Software Engineer · London, UK</p>
+    <h1>Backend systems, cloud infrastructure and reliability.</h1>
+    <p class="lede">I build and run production services, most recently making an engineering simulation platform
+      highly available on Kubernetes. Before that I worked on AWS Inspector at Amazon and on Spend Management at U.S. Bank.</p>
+    <div class="actions">
+      <a class="button primary" href="/cv/">View CV</a>
+      <a class="button" href="https://github.com/MWJones96">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub</a>
+      <a class="button" href="https://www.linkedin.com/in/mwjones96/">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+        LinkedIn</a>
+    </div>
+    <ul class="facts">
+      <li><strong>6+ years</strong> professional experience</li>
+      <li><strong>MS Computer Science</strong>, USC</li>
+      <li><strong>Rust · Java · Python · Go · TypeScript</strong></li>
+    </ul>
+  </header>
 
-  <footer>
-    <a href="https://github.com/MWJones96">GitHub</a>
-    <a href="https://www.linkedin.com/in/mwjones96/">LinkedIn</a>
-    <a href="mailto:mwjones0896@gmail.com">mwjones0896@gmail.com</a>
+  <section id="experience">
+    <h2>Experience</h2>
+    <ol class="timeline">
+      <li class="role">
+        <div class="when">Aug 2026 – Present</div>
+        <div>
+          <h3>Software Engineer (Contract) <span class="org">· Quaisr</span></h3>
+          <p>Leading the work to make an engineering simulation platform, used by aerospace, defence and pharmaceutical
+            firms, highly available on Kubernetes across AWS and customer-hosted deployments.</p>
+        </div>
+      </li>
+      <li class="role">
+        <div class="when">Jan 2024 – Nov 2024</div>
+        <div>
+          <h3>Software Engineer (Contract) <span class="org">· U.S. Bank / Bento Technologies</span></h3>
+          <p>Helped launch U.S. Bank Spend Management, implemented Azure AD single sign-on for 3,000+ support agents,
+            and led a move from a monolith to Spring Boot microservices that raised developer velocity by 50%.</p>
+        </div>
+      </li>
+      <li class="role">
+        <div class="when">Oct 2021 – Mar 2023</div>
+        <div>
+          <h3>Software Development Engineer <span class="org">· Amazon Web Services</span></h3>
+          <p>Built backend services in Java, Rust and Go for AWS Inspector, a vulnerability scanner with 125,000+
+            monthly active users across 21 regions, plus CI/CD pipelines in AWS CDK.</p>
+        </div>
+      </li>
+      <li class="role">
+        <div class="when">Sep 2020 – Aug 2021</div>
+        <div>
+          <h3>Programmer Analyst <span class="org">· USC Alzheimer’s Therapeutic Research Institute</span></h3>
+          <p>Built features for a clinical-trial data capture system in Django, React and AWS, and GraphQL APIs for a
+            patient referral system used by 100,000+ clinical staff.</p>
+        </div>
+      </li>
+      <li class="role">
+        <div class="when">May 2020 – Present</div>
+        <div>
+          <h3>Technical Consultant <span class="org">· Freelance</span></h3>
+          <p>Software and security engagements for around 20 clients across the UK, US, Canada and the EU.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="projects">
+    <h2>Featured projects</h2>
+    <div class="featured">
+      <a class="card" href="https://github.com/MWJones96/NESEmulator">
+        <h3>NES Emulator <span class="arrow">↗</span></h3>
+        <p>A cycle-stepped Nintendo Entertainment System emulator, with the CPU and picture processor on a shared clock.</p>
+        <ul>
+          <li>All 256 6502 opcodes, including the unofficial ones, with accurate cycle counts</li>
+          <li>CPU checked line by line against the <code>nestest</code> reference log</li>
+          <li>Background rendering, scrolling, OAM DMA and mapper 0</li>
+          <li>Trait-based design, unit-tested with <code>mockall</code>; CI on every push</li>
+        </ul>
+        <div class="tags"><span class="tag lang">Rust</span><span class="tag">Emulation</span><span class="tag">GitHub Actions</span></div>
+      </a>
+      <a class="card" href="https://github.com/MWJones96/.dotfiles">
+        <h3>Reproducible dev environment <span class="arrow">↗</span></h3>
+        <p>My whole macOS development setup, from CLI tools to GUI apps, declared in a single Nix flake.</p>
+        <ul>
+          <li>One command sets up a new machine; scripts add, remove and apply changes</li>
+          <li>Neovim with LSP, debugging and tests for Rust, Python, C, C++ and C#</li>
+          <li>zsh, tmux, Alacritty and direnv configured as plain, versioned files</li>
+          <li>The flake is checked in CI</li>
+        </ul>
+        <div class="tags"><span class="tag lang">Nix</span><span class="tag lang">Lua</span><span class="tag">Neovim</span><span class="tag">CI</span></div>
+      </a>
+      <a class="card" href="https://github.com/MWJones96/coding-challenges">
+        <h3>Coding Challenges <span class="arrow">↗</span></h3>
+        <p>Rebuilding classic Unix tools from scratch, as a Cargo workspace with one crate per challenge.</p>
+        <ul>
+          <li>An <code>md5sum</code> clone with SHA and HMAC support, every hash written by hand</li>
+          <li>A <code>wc</code> clone covering bytes, lines, words and UTF-8 characters</li>
+          <li>An RFC 8259 JSON lexer with precise error locations (parser in progress)</li>
+        </ul>
+        <div class="tags"><span class="tag lang">Rust</span><span class="tag">Cryptography</span><span class="tag">CLI</span></div>
+      </a>
+      <a class="card" href="https://github.com/MWJones96/Advent-of-Code-2025">
+        <h3>Advent of Code <span class="arrow">↗</span></h3>
+        <p>Solutions to the 2024 and 2025 Advent of Code puzzles, one module per day.</p>
+        <ul>
+          <li>2025 days 1–11 and 2024 days 1–20 solved in full</li>
+          <li>Integer systems solved with the Z3 theorem prover</li>
+          <li>Inputs embedded at compile time, so each day runs with no setup</li>
+        </ul>
+        <div class="tags"><span class="tag lang">Rust</span><span class="tag">Algorithms</span><span class="tag">Z3</span></div>
+      </a>
+    </div>
+
+    <h2 class="sub">More projects</h2>
+    <div class="grid">
+      <a class="card" href="https://github.com/MWJones96/RustGo">
+        <h3>Go rules engine <span class="arrow">↗</span></h3>
+        <p>The rules of the board game Go, with captures, liberties and the ko rule, in a Clean Architecture layout.</p>
+        <div class="tags"><span class="tag lang">Rust</span></div>
+      </a>
+      <a class="card" href="https://github.com/MWJones96/Chess">
+        <h3>Chess <span class="arrow">↗</span></h3>
+        <p>Two-player chess with legal-move filtering and check, checkmate and stalemate detection.</p>
+        <div class="tags"><span class="tag lang">Java</span><span class="tag">Swing</span></div>
+      </a>
+      <a class="card" href="https://github.com/MWJones96/Scientific-Calculator">
+        <h3>Scientific Calculator <span class="arrow">↗</span></h3>
+        <p>Parses infix expressions with the shunting-yard algorithm and evaluates them in Reverse Polish Notation.</p>
+        <div class="tags"><span class="tag lang">C++</span><span class="tag">Qt</span></div>
+      </a>
+      <a class="card" href="https://github.com/MWJones96/Chip8-Interpreter">
+        <h3>Chip-8 Interpreter <span class="arrow">↗</span></h3>
+        <p>A virtual machine for the 1970s Chip-8 language, with display, timers and keypad input.</p>
+        <div class="tags"><span class="tag lang">Python</span></div>
+      </a>
+      <a class="card" href="https://github.com/MWJones96/Task-Tracker-CLI">
+        <h3>Task Tracker CLI <span class="arrow">↗</span></h3>
+        <p>A command-line task manager with statuses and JSON persistence, built to the roadmap.sh brief.</p>
+        <div class="tags"><span class="tag lang">Rust</span><span class="tag">CLI</span></div>
+      </a>
+      <a class="card" href="https://github.com/MWJones96/Minesweeper">
+        <h3>Minesweeper <span class="arrow">↗</span></h3>
+        <p>A classic-style Minesweeper with flood-fill reveal, written with a model-view-controller split.</p>
+        <div class="tags"><span class="tag lang">Java</span><span class="tag">MVC</span></div>
+      </a>
+      <a class="card" href="https://github.com/MWJones96/PyTetris">
+        <h3>Tetris <span class="arrow">↗</span></h3>
+        <p>Tetris with a ghost piece, next-piece preview, levels and classic scoring.</p>
+        <div class="tags"><span class="tag lang">Python</span><span class="tag">Pygame</span></div>
+      </a>
+      <a class="card" href="https://github.com/MWJones96/Pokedex">
+        <h3>Pokédex <span class="arrow">↗</span></h3>
+        <p>A browsable Pokédex by generation, with type-coloured cards, using data from PokéAPI.</p>
+        <div class="tags"><span class="tag lang">TypeScript</span><span class="tag">Angular</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <dl class="skills">
+      <dt>Languages</dt>
+      <dd><span class="tag">Python</span><span class="tag">Java</span><span class="tag">C#</span><span class="tag">Rust</span><span class="tag">C/C++</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">Go</span></dd>
+      <dt>Frameworks &amp; data</dt>
+      <dd><span class="tag">Spring Boot</span><span class="tag">.NET</span><span class="tag">Django</span><span class="tag">Node.js</span><span class="tag">Angular</span><span class="tag">React</span><span class="tag">PostgreSQL</span><span class="tag">DynamoDB</span><span class="tag">GraphQL</span></dd>
+      <dt>Cloud &amp; tools</dt>
+      <dd><span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Helm</span><span class="tag">Terraform</span><span class="tag">CI/CD</span><span class="tag">Linux</span><span class="tag">Git</span></dd>
+    </dl>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="edu">
+      <div class="card">
+        <h3>University of Southern California</h3>
+        <p>Master of Science in Computer Science · 2020</p>
+      </div>
+      <div class="card">
+        <h3>University of Exeter</h3>
+        <p>Master of Engineering in Electronic Engineering and Computer Science · 2018</p>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <h2>Get in touch</h2>
+    <p>Open to software engineering roles. The quickest way to reach me is by email.</p>
+    <div class="actions">
+      <a class="button primary" href="mailto:mwjones0896@gmail.com">mwjones0896@gmail.com</a>
+      <a class="button" href="/cv/">View CV</a>
+    </div>
   </footer>
 </main>
 </body>

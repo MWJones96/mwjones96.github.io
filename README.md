@@ -8,7 +8,7 @@ A static site with no build step. GitHub Pages serves the files as they are, so 
 
 ## Pages
 
-- **`/`** (`index.html`): homepage with a short introduction, a "View CV" button, cards linking to selected projects on GitHub, and links to GitHub, LinkedIn and email. Styles are inline and follow the visitor's light or dark colour scheme.
+- **`/`** (`index.html`): homepage with an introduction, a "View CV" button, experience, featured and other projects linking to GitHub, skills, education and contact links. Styles are inline, with the Inter and JetBrains Mono fonts from Google Fonts, and follow the visitor's light or dark colour scheme.
 - **`/cv/`** (`cv/index.html`): redirects to the right CV for the visitor's location, decided from the browser's time zone:
   - `Europe/London`, `Europe/Belfast`, `Europe/Guernsey`, `Europe/Isle_of_Man` or `Europe/Jersey` go to `/uk/cv.pdf`.
   - Any other time zone, or one that cannot be read, goes to `/us/cv.pdf`.
