@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matthew Jones · CV</title>
+<script>
+  var uk = ["Europe/London", "Europe/Belfast", "Europe/Guernsey", "Europe/Isle_of_Man", "Europe/Jersey"];
+  var tz = "";
+  try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) {}
+  location.replace(uk.indexOf(tz) >= 0 ? "uk.pdf" : "us.pdf");
+</script>
+</head>
+<body>
+<p>Choose an edition: <a href="us.pdf">US</a> · <a href="uk.pdf">UK</a></p>
+</body>
+</html>
